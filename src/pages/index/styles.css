@@ -1,0 +1,65 @@
+.blockLight,
+.block {
+  display: table;
+  width: 100%;
+  border: solid 1px #eee;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 20px;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.blockLight {
+  cursor: pointer;
+}
+
+.blockLight:hover {
+  background: #f1f1f1;
+}
+
+.block input {
+  width: 80%;
+}
+
+.line {
+  width: 100%;
+  table-layout: fixed;
+  display: table-row;
+}
+
+.line > div {
+  padding: 10px 0;
+  border-collapse: collapse;
+  display: table-cell;
+}
+
+.ticker {
+  display: inline-block;
+}
+
+.ticker span {
+  background: #ccc;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+
+.ticker .error {
+  background: red;
+}
+
+.button {
+  font-size: 14px;
+  padding: 5px 10px;
+  width: auto;
+  display: inline-block;
+}
+
+.lightTitle {
+  margin-left: 10px;
+}
+
+.search {
+  margin-bottom: 20px !important;
+}

@@ -1,0 +1,19 @@
+.wrapper {
+  padding: 20px 30px;
+  background: #1f1f1f;
+}
+
+.wrapper div,
+.wrapper a {
+  margin: 0 10px;
+  padding-bottom: 3px;
+  cursor: pointer;
+  color: $colorPrimary;
+  text-decoration: none;
+  border-bottom: solid 1px $colorPrimary;
+}
+
+.wrapper .active {
+  color: #fff;
+  border-bottom-color: transparent;
+}

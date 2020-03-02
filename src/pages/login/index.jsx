@@ -1,0 +1,84 @@
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import Title from '../../components/title';
+import { CustomInput as Input } from '../../components/input';
+import Button from '../../components/button';
+import { setToken, isToken } from '../../libs/token';
+import { post } from '../../libs/api';
+import styles from './styles.css';
+
+class LoginPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
+
+  componentWillMount() {
+    if (isToken()) {
+      this.props.history.replace('/');
+    }
+  }
+
+  handleChange = label => ({ target: { value } }) => this.setState({ [label]: value })
+
+  handleLogin = async () => {
+    const { email, password } = this.state;
+
+    if (!email || !password) {
+      this.showError('Empty label');
+      return;
+    }
+
+    const { data } = await post('/auth', { email, password });
+
+    if (!data.token) {
+      this.showError('Failed authorization');
+      return;
+    }
+    setToken(data.token);
+    this.props.history.replace(this.props.location.pathname);
+  }
+
+  showError = (error) => {
+    this.setState({ error });
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => this.setState({ error: false }), 3000);
+  }
+
+  render() {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.row}>
+          <Title level={2}>Authorization</Title>
+        </div>
+        <div className={styles.row}>
+          <Input
+            placeholder="Email"
+            value={this.state.email}
+            onChange={this.handleChange('email')}
+          />
+        </div>
+        <div className={styles.row}>
+          <Input
+            type="password"
+            placeholder="Password"
+            value={this.state.password}
+            onChange={this.handleChange('password')}
+          />
+        </div>
+        <div className={styles.row}>
+          <Button onClick={this.handleLogin} type="primary" block>Login</Button>
+        </div>
+        {this.state.error ? (
+          <div className={styles.error}>{this.state.error}</div>
+        ) : null}
+      </div>
+    );
+  }
+}
+
+
+export default withRouter(LoginPage);

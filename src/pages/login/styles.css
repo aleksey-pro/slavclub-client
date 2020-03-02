@@ -1,0 +1,21 @@
+.wrapper h2 {
+  margin: 0;
+  font-weight: 100;
+}
+
+.wrapper {
+  width: 380px;
+  box-shadow: 0 1px 4px rgba(#000, 0.2);
+  border-radius: 3px;
+  margin: 200px auto 0;
+  padding: 20px;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+.error {
+  text-align: center;
+  color: red;
+}

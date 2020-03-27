@@ -49,12 +49,12 @@
   background: red;
 }
 
-.button {
+/* .button {
   font-size: 14px;
   padding: 5px 10px;
   width: auto;
   display: inline-block;
-}
+} */
 
 .lightTitle {
   margin-left: 10px;
@@ -62,4 +62,8 @@
 
 .search {
   margin-bottom: 20px !important;
+}
+
+.actionBtn {
+  margin: 0.5rem 2rem 0 1rem;
 }

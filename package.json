@@ -42,9 +42,11 @@
     "webpack-dev-server": "3.2.1"
   },
   "dependencies": {
-    "antd": "^3.26.2",
+    "antd": "^4.0.2",
     "axios": "0.18.0",
     "classnames": "2.2.6",
+    "file-saver": "^2.0.2",
+    "qrcode": "^1.4.4",
     "react": "16.8.5",
     "react-dom": "16.8.5",
     "react-hot-loader": "4.8.0",

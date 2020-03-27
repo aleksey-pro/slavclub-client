@@ -29,6 +29,7 @@ module.exports = {
     'react/jsx-one-expression-per-line': [0],
     'react/destructuring-assignment': [0],
     'no-underscore-dangle': [0]
+    "react/prop-types": 0,
   },
   extends: 'airbnb',
 };

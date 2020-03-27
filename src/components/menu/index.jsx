@@ -13,7 +13,8 @@ class Menu extends Component {
   render() {
     return (
       <div className={styles.wrapper}>
-        <NavLink exact to="/" activeClassName={styles.active}>Главная</NavLink>
+        <a href="http://www.xn--80aaf8admgsd3i.xn--p1acf" className={styles.active}>На главную</a>
+        <NavLink exact to="/admin" className={styles.active}>Клиенты</NavLink>
         <div className="pull-right" onClick={this.handleLogout}>Выйти</div>
       </div>
     );

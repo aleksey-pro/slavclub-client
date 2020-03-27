@@ -9,6 +9,7 @@ import { hot } from 'react-hot-loader/root';
 import LoginPage from './pages/login';
 import IndexPage from './pages/index';
 import ClientPage from './pages/client';
+import CreatePage from './pages/create';
 import { isToken } from './libs/token';
 
 
@@ -19,16 +20,20 @@ const App = () => (
     ) : null}
     <Route
       exact
-      path="/"
-      render={value =><IndexPage {...value} />}
+      path="/admin"
+      render={value => <IndexPage {...value} />}
     />
     <Route
       exact
       path="/client/:id"
-      // render={value => <CurrenciesContextProvider><ExchangesPage {...value} /></CurrenciesContextProvider>}
-      render={value =><ClientPage {...value} />}
+      render={value => <ClientPage {...value} />}
     />
-    <Redirect to="/" />
+    <Route
+      exact
+      path="/create"
+      render={value => <CreatePage {...value} />}
+    />
+    <Redirect to="/admin" />
   </Switch>
 );
 

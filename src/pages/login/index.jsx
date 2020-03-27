@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Title from '../../components/title';
-import { CustomInput as Input } from '../../components/input';
-import Button from '../../components/button';
+import { Button, Input } from 'antd';
 import { setToken, isToken } from '../../libs/token';
 import { post } from '../../libs/api';
 import styles from './styles.css';
@@ -18,7 +17,7 @@ class LoginPage extends Component {
 
   componentWillMount() {
     if (isToken()) {
-      this.props.history.replace('/');
+      this.props.history.replace('/admin');
     }
   }
 
@@ -28,17 +27,18 @@ class LoginPage extends Component {
     const { email, password } = this.state;
 
     if (!email || !password) {
-      this.showError('Empty label');
+      this.showError('Введите данные');
       return;
     }
 
     const { data } = await post('/auth', { email, password });
+    const { token } = data;
 
-    if (!data.token) {
-      this.showError('Failed authorization');
+    if (!token) {
+      this.showError('Ошибка авторизации');
       return;
     }
-    setToken(data.token);
+    setToken(token);
     this.props.history.replace(this.props.location.pathname);
   }
 

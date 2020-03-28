@@ -77,7 +77,7 @@ const ClientPage = (props) => {
           <Form.Item
             label="QR-код"
           >
-            <a href={link}>Скачать QR-код</a>
+            <a href={link} download>Скачать QR-код</a>
           </Form.Item>
 
           <Form.Item>

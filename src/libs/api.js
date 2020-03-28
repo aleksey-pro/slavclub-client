@@ -3,7 +3,7 @@ import { getToken } from './token';
 
 const API_URL = {
   production: 'http://www.xn--80aaf8admgsd3i.xn--p1acf/api/v1',
-  development: 'http://localhost:3050/api/v1',
+  development: 'http://localhost:3055/api/v1',
   staging: 'http://www.xn--80aaf8admgsd3i.xn--p1acf/api/v1',
 };
 

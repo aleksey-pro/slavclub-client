@@ -12,29 +12,24 @@ const { Column } = Table;
 const { Search } = Input;
 
 const IndexPage = () => {
-  const isLoading = false;
-  const [search, handleSearch] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     get('/clients').then((response) => {
       setData(response.data);
+      setIsLoading(false);
     });
   }, []);
 
-  // getList = (currs) => {
-  //   if (!this.state.search) {
-  //     return currs;
-  //   }
-
-  //   const reg = new RegExp(encodeURIComponent(this.state.search), 'i');
-
-  //   return currs.filter(coin => reg.test(coin.title) || reg.test(coin.ticker));
-  // }
-
-  // handleSearch = ({ target: { value } }) => {
-  //   this.setState({ search: value });
-  // }
+  const handleSearchClient = (value) => {
+    if (!value.length) setIsSearching(false);
+    setIsSearching(true);
+    const reg = new RegExp(encodeURIComponent(value), 'i');
+    setFilteredData(data.filter(client => reg.test(client.name)));
+  }
 
   const handleRemoveClient = (evt, id) => {
     evt.preventDefault();
@@ -44,8 +39,13 @@ const IndexPage = () => {
       });
   };
 
+  const getData = data => {
+    if(isSearching) return filteredData;
+    return data;
+  }
+
   const renderDataTable = () => (
-    <Table dataSource={data} size="middle">
+    <Table dataSource={getData(data)} size="middle">
       <Column title="Имя" dataIndex="name" key="name" />
       <Column
         title="Действия"
@@ -74,9 +74,8 @@ const IndexPage = () => {
       <Menu />
       <div className="wrapper">
         <Search
-          value={search}
           placeholder="Search..."
-          onChange={handleSearch}
+          onSearch={handleSearchClient}
           className={styles.search}
         />
         <div className={styles.wrapperList}>

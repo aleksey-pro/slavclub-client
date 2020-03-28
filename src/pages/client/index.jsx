@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { saveAs } from 'file-saver';
 import Menu from '../../components/menu';
@@ -8,34 +8,37 @@ import { get, update } from '../../libs/api';
 const ClientPage = (props) => {
   const { id } = props.match.params;
   const [clData, setClData] = useState({});
-  const {
-    name, info, visits, link,
-  } = clData;
+  const [updated, setUpdated] = useState(false);
+
   const { TextArea } = Input;
+  const { Option } = Select;
   const [form] = Form.useForm();
+
 
   useEffect(() => {
     get(`/client/${id}`).then(({ data }) => {
       setClData(data);
       form.setFieldsValue({
-        name: data.name,
-        visits: data.visits,
-        info: data.info,
+        name: data.name || '',
+        visits: data.visits || 0,
+        info: data.info || '',
+        bonuses: data.bonuses || 0,
       });
     });
   }, []);
 
-  const layout = {
-    labelCol: { span: 2 },
-    wrapperCol: { span: 16 },
-  };
-
   const onFinish = values => {
     const dataUpdated = { ...clData, ...values };
-    setClData(dataUpdated);
     update(`/clients/${id}`, dataUpdated).then(({ data }) => {
-      console.log('Данные обновлены');
+      setClData(data);
+      form.setFieldsValue({ bonuses: data.bonuses });
+      setUpdated(true);
+      setTimeout(() => {setUpdated(false)}, 2000);
     });
+  };
+
+  const handleSelectService = (value) => {
+    setClData({ ...clData, bonusesToAdd: value})
   };
 
   const onFinishFailed = errorInfo => {
@@ -47,9 +50,9 @@ const ClientPage = (props) => {
       <Menu />
       <div className="wrapper">
         <Form
-          {...layout}
           form={form}
           name="basic"
+          layout="vertical"
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
@@ -68,6 +71,30 @@ const ClientPage = (props) => {
           </Form.Item>
 
           <Form.Item
+            label="Баллов"
+            name="bonuses"
+          >
+            <Input disabled/>
+          </Form.Item>
+
+          <Form.Item
+            label="Выберите услугу для начисления баллов"
+            name="bonusesToAdd"
+          >
+            <Select onChange={handleSelectService} defaultValue="0">
+              <Option key={0} value="0">Нет услуги</Option>
+              <Option key={1} value="10">Стрижка головы (+10)</Option>
+              <Option key={2} value="8">Оформление бороды (+8)</Option>
+              <Option key={3} value="15">Стрижка и оформление бороды (+15)</Option>
+              <Option key={4} value="17">Детская стрижка (+7)</Option>
+              <Option key={5} value="5">Стрижка под насадку (+5)</Option>
+              <Option key={6} value="5">Бритье головы (+5)</Option>
+              <Option key={7} value="4">Камуфляж бороды (+4)</Option>
+              <Option key={8} value="4">Массаж головы (+4)</Option>
+            </Select>
+          </Form.Item>
+
+          <Form.Item
             label="Заметки"
             name="info"
           >
@@ -77,12 +104,12 @@ const ClientPage = (props) => {
           <Form.Item
             label="QR-код"
           >
-            <a href={link} download>Скачать QR-код</a>
+            <a href={clData.link} target="blank noreferrer noopener">Скачать QR-код</a>
           </Form.Item>
 
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              Обновить
+              {updated ? 'Данные обновлены' : 'Обновить'}
             </Button>
           </Form.Item>
         </Form>

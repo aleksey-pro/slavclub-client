@@ -52,7 +52,7 @@ class LoginPage extends Component {
     return (
       <div className={styles.wrapper}>
         <div className={styles.row}>
-          <Title level={2}>Authorization</Title>
+          <Title level={2}>Авторизация</Title>
         </div>
         <div className={styles.row}>
           <Input
@@ -70,7 +70,7 @@ class LoginPage extends Component {
           />
         </div>
         <div className={styles.row}>
-          <Button onClick={this.handleLogin} type="primary" block>Login</Button>
+          <Button onClick={this.handleLogin} type="primary" block>Войти</Button>
         </div>
         {this.state.error ? (
           <div className={styles.error}>{this.state.error}</div>

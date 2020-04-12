@@ -39,7 +39,7 @@ class LoginPage extends Component {
       return;
     }
     setToken(token);
-    this.props.history.replace(this.props.location.pathname);
+    window.location.reload();
   }
 
   showError = (error) => {

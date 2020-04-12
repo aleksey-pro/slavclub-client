@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { saveAs } from 'file-saver';
+
 import Menu from '../../components/menu';
+import { NotifyBlock, notifyWarning, notifyError } from '../../libs/notify';
 import { get, update } from '../../libs/api';
 
 const ClientPage = (props) => {
@@ -16,7 +18,8 @@ const ClientPage = (props) => {
 
 
   useEffect(() => {
-    get(`/client/${id}`).then(({ data }) => {
+    get(`/client/${id}`)
+    .then(({ data }) => {
       setClData(data);
       form.setFieldsValue({
         name: data.name || '',
@@ -24,17 +27,24 @@ const ClientPage = (props) => {
         info: data.info || '',
         bonuses: data.bonuses || 0,
       });
+    })
+    .catch(() => {
+      notifyError('Ошибка на сервере. Попробуйте перезагрузить страницу');
     });
   }, []);
 
   const onFinish = values => {
     const dataUpdated = { ...clData, ...values };
-    update(`/clients/${id}`, dataUpdated).then(({ data }) => {
+    update(`/clients/${id}`, dataUpdated)
+    .then(({ data }) => {
       setClData(data);
       form.setFieldsValue({ bonuses: data.bonuses });
       setUpdated(true);
       setTimeout(() => {setUpdated(false)}, 2000);
-    });
+    })
+    .catch((err) => {
+      notifyWarning('Недостаточно прав для совершения операции');
+    });    
   };
 
   const handleSelectService = (value) => {
@@ -114,6 +124,7 @@ const ClientPage = (props) => {
           </Form.Item>
         </Form>
       </div>
+      <NotifyBlock/>
     </>
 
   );

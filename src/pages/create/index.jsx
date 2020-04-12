@@ -4,6 +4,7 @@ import {
   Input,
   Button,
 } from 'antd';
+import { NotifyBlock, notifyWarning, notifyError } from '../../libs/notify';
 import Menu from '../../components/menu';
 import { post } from '../../libs/api';
 
@@ -19,7 +20,9 @@ const CreatePage = (props) => {
         }
       })
       // eslint-disable-next-line no-console
-      .catch(err => console.log(err));
+      .catch(() => {
+        notifyWarning('Недостаточно прав для совершения операции');
+      });
   };
   return (
     <>
@@ -48,6 +51,7 @@ const CreatePage = (props) => {
           </Form.Item>
         </Form>
       </div>
+      <NotifyBlock/>
     </>
   );
 };

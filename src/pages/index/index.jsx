@@ -6,6 +6,7 @@ import Loader from '../../components/loader';
 import { get, remove } from '../../libs/api';
 import Title from '../../components/title';
 import Menu from '../../components/menu';
+import { NotifyBlock, notifyWarning, notifyError } from '../../libs/notify';
 import styles from './styles.css';
 
 const { Column } = Table;
@@ -18,9 +19,13 @@ const IndexPage = () => {
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
-    get('/clients').then((response) => {
+    get('/clients')
+    .then((response) => {
       setData(response.data);
       setIsLoading(false);
+    }) 
+    .catch(() => {
+      notifyError('Ошибка на сервере. Попробуйте перезагрузить страницу');
     });
   }, []);
 
@@ -36,6 +41,9 @@ const IndexPage = () => {
     remove(`/clients/${id}`)
       .then((response) => {
         setData(data.filter(client => client.id !== response.data.id));
+      })
+      .catch(() => {
+        notifyWarning('Недостаточно прав для совершения операции');
       });
   };
 
@@ -45,7 +53,7 @@ const IndexPage = () => {
   }
 
   const renderDataTable = () => (
-    <Table dataSource={getData(data)} size="middle">
+    <Table dataSource={getData(data)} size="middle" rowKey="name">
       <Column title="Имя" dataIndex="name" key="name" />
       <Column
         title="Действия"
@@ -74,7 +82,7 @@ const IndexPage = () => {
       <Menu />
       <div className="wrapper">
         <Search
-          placeholder="Search..."
+          placeholder="Поиск..."
           onSearch={handleSearchClient}
           className={styles.search}
         />
@@ -93,6 +101,7 @@ const IndexPage = () => {
           <NavLink exact to="/create" activeClassName={styles.active}>Создать клиента</NavLink>
         </Button>
       </div>
+      <NotifyBlock />
     </>
   );
 };

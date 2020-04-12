@@ -16,10 +16,18 @@ export const api = axios.create({
   }
 });
 
-export const get = (url, params = {}) => api.get(url, params);
+export const get = (url, params = {}) => api.get(url, params).catch(error => {
+  // console.log(error.response.data.error);
+});
 
-export const post = (url, params = {}) => api.post(url, params);
+export const post = (url, params = {}) => api.post(url, params).catch(error => {
+  // console.log(error.response.data.error);
+});;
 
-export const update = (url, params = {}) => api.put(url, params);
+export const update = (url, params = {}) => api.put(url, params).catch(error => {
+  console.log(error.response.data.error);
+});
 
-export const remove = (url, params = {}) => api.delete(url, params);
+export const remove = (url, params = {}) => api.delete(url, params).catch(error => {
+  // console.log(error.response.data.error);
+});

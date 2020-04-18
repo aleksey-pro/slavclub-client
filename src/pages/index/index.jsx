@@ -9,7 +9,6 @@ import Menu from '../../components/menu';
 import { NotifyBlock, notifyWarning, notifyError } from '../../libs/notify';
 import styles from './styles.css';
 
-const { Column } = Table;
 const { Search } = Input;
 
 const IndexPage = () => {
@@ -40,6 +39,7 @@ const IndexPage = () => {
     evt.preventDefault();
     remove(`/clients/${id}`)
       .then((response) => {
+        alert("Внимание! Все данные будут потеряны. Вы уверены, что хотите удалить клиента?");
         setData(data.filter(client => client.id !== response.data.id));
       })
       .catch(() => {
@@ -52,29 +52,37 @@ const IndexPage = () => {
     return data;
   }
 
+  const renderActionsCell = (text, record) => (
+    <span>
+      <Button className={styles.actionBtn}>
+        <NavLink to={`/client/${record.id}`}>Просмотр</NavLink>
+      </Button>
+      <Button
+        type="button"
+        onClick={e => handleRemoveClient(e, record.id)}
+        className={styles.actionBtn}
+        >Удалить
+      </Button>
+    </span>
+  )
+
+  const columns = [
+    {
+      title: 'Имя',
+      dataIndex: 'name',
+      defaultSortOrder: 'descend',
+      sorter: (a, b) => a.name.localeCompare(b.name),
+    },
+    {
+      title: "Действия",
+      dataIndex: "action",
+      width: '50%',
+      render: (text, record) => renderActionsCell(text, record)
+    }
+  ];
+
   const renderDataTable = () => (
-    <Table dataSource={getData(data)} size="middle" rowKey="name">
-      <Column title="Имя" dataIndex="name" key="name" />
-      <Column
-        title="Действия"
-        key="action"
-        dataIndex="action"
-        width="50%"
-        render={(text, record) => (
-          <span>
-            <Button className={styles.actionBtn}>
-              <NavLink to={`/client/${record.id}`}>Просмотр</NavLink>
-            </Button>
-            <Button
-              type="button"
-              onClick={e => handleRemoveClient(e, record.id)}
-              className={styles.actionBtn}
-              >Удалить
-            </Button>
-          </span>
-        )}
-      />
-    </Table>
+    <Table dataSource={getData(data)} columns={columns} size="middle" rowKey="name" />
   );
 
   return (

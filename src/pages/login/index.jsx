@@ -25,7 +25,6 @@ class LoginPage extends Component {
 
   handleLogin = async () => {
     const { email, password } = this.state;
-
     if (!email || !password) {
       this.showError('Введите данные');
       return;
@@ -72,6 +71,9 @@ class LoginPage extends Component {
         <div className={styles.row}>
           <Button onClick={this.handleLogin} type="primary" block>Войти</Button>
         </div>
+        <div className={styles.row}>
+          <Button href="http://www.xn--80aaf8admgsd3i.xn--p1acf" type="secondary" block>Обратно на сайт</Button>
+        </div>        
         {this.state.error ? (
           <div className={styles.error}>{this.state.error}</div>
         ) : null}

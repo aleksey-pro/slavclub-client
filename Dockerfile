@@ -7,7 +7,7 @@ COPY . /app
 
 RUN npm i
 
-RUN npm run build:staging
+RUN npm run build:prod
 
 #///////////////////////////////////////////
 FROM nginx:1.15-alpine

@@ -96,7 +96,7 @@ const ClientPage = (props) => {
               <Option key={1} value="10">Стрижка головы (+10)</Option>
               <Option key={2} value="8">Оформление бороды (+8)</Option>
               <Option key={3} value="15">Стрижка и оформление бороды (+15)</Option>
-              <Option key={4} value="17">Детская стрижка (+7)</Option>
+              <Option key={4} value="7">Детская стрижка (+7)</Option>
               <Option key={5} value="5">Стрижка под насадку (+5)</Option>
               <Option key={6} value="5">Бритье головы (+5)</Option>
               <Option key={7} value="4">Камуфляж бороды (+4)</Option>

@@ -34,7 +34,8 @@ const ClientPage = (props) => {
   }, []);
 
   const onFinish = values => {
-    const dataUpdated = { ...clData, ...values };
+    const bonusesToAdd = values.bonusesToAdd || 0;
+    const dataUpdated = { ...clData, ...values, bonusesToAdd };
     update(`/clients/${id}`, dataUpdated)
     .then(({ data }) => {
       setClData(data);

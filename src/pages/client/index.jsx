@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Input, Button, Select } from 'antd';
-import { NavLink } from 'react-router-dom';
-import { saveAs } from 'file-saver';
-
+import { Form, Input, InputNumber, Button, Select } from 'antd';
+import StarRatingComponent from 'react-star-rating-component';
 import Menu from '../../components/menu';
 import { NotifyBlock, notifyWarning, notifyError } from '../../libs/notify';
 import { get, update } from '../../libs/api';
+import styles from'./styles.css';
 
 const ClientPage = (props) => {
   const { id } = props.match.params;
@@ -26,6 +25,7 @@ const ClientPage = (props) => {
         visits: data.visits || 0,
         info: data.info || '',
         bonuses: data.bonuses || 0,
+        orderNum: data.orderNum,
       });
     })
     .catch(() => {
@@ -52,6 +52,10 @@ const ClientPage = (props) => {
     setClData({ ...clData, bonusesToAdd: value})
   };
 
+  const onStarClick = (nextValue) => {
+    setClData({ ...clData, rating: nextValue })
+  }
+
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };
@@ -73,6 +77,14 @@ const ClientPage = (props) => {
           >
             <Input />
           </Form.Item>
+
+          <Form.Item
+            label="Порядковый номер брелка"
+            name="orderNum"
+            value={clData.orderNum}
+          >
+            <InputNumber min={1}/>
+          </Form.Item>     
 
           <Form.Item
             label="Визитов"
@@ -111,6 +123,18 @@ const ClientPage = (props) => {
           >
             <TextArea rows={4}/>
           </Form.Item>
+
+          <div className="rating-wrapper">
+            <h3>Личная оценка клиента</h3>
+            <StarRatingComponent 
+                  name="rate1" 
+                  starCount={10}
+                  value={clData.rating}
+                  onStarClick={onStarClick}
+                  emptyStarColor="#bb0a0a" 
+                  className={styles.rating}  
+              />
+          </div>
 
           <Form.Item
             label="QR-код"

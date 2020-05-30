@@ -7,8 +7,10 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: Roboto;
+  color: #000;
+  font-family: 'Philosopher', sans-serif;
 }
+
 
 a {
   color: $colorPrimary;
@@ -16,93 +18,4 @@ a {
 
 :global(.pull-right) {
   float: right;
-}
-
-:global(.wrapper) {
-  margin: 50px auto;
-  max-width: 80vw;
-  padding-bottom: 100px;
-}
-
-:global(.loader) {
-  width: 48px;
-  height: 48px;
-  stroke: $colorPrimary;
-}
-
-:global(.columns) {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-:global(.column) {
-  width: 48%;
-}
-
-:global(.column-70) {
-  width: 68%;
-}
-
-:global(.column-30) {
-  width: 28%;
-}
-
-:global(.row) {
-  margin-bottom: 40px;
-}
-
-:global(.dashed) {
-  border-bottom: dashed 1px $colorPrimary;
-  color: $colorPrimary;
-  display: inline-block;
-  cursor: pointer;
-  user-select: none;
-}
-
-:global(.table) {
-  width: 100%;
-  table-layout: fixed;
-  border-spacing: 1px;
-  vertical-align: top;
-  margin-top: -1px;
-  margin-bottom: 5px;
-  border-radius: 3px;
-  background: #666;
-  font-size: 14px;
-}
-
-:global(.table tbody td) {
-  padding: 4px 8px;
-  word-break: break-all;
-  vertical-align: top;
-  line-height: 22px;
-  background: #4a4a4a;
-  margin: 1px;
-}
-
-:global(.table thead td) {
-  padding: 7px 8px;
-  color: $colorPrimary;
-  vertical-align: top;
-  background: #4a4a4a;
-}
-
-:global(.dashed:hover) {
-  border-bottom: solid 1px white;
-  color: white;
-}
-
-:global(.table thead td:first-child) {
-  border-top-left-radius: 3px;
-}
-
-:global(.table thead td:last-child) {
-  border-top-right-radius: 3px;
-}
-
-input {
-  font-family: Roboto;
-  padding: 5px;
-  font-size: 14px;
 }

@@ -15,7 +15,7 @@ const config = {
   output: {
     filename: '[name].bundle.js?[hash]',
     path: path.resolve(__dirname, './dist'),
-    publicPath: './',
+    // publicPath: './',
   },
 
   devServer: {
@@ -74,6 +74,46 @@ config.module.rules.push({
         ]),
     },
   },
+});
+
+// Assets
+//------------------------------------
+
+const name = '[hash:base64:7].[ext]';
+
+config.module.rules.push({
+  test: /\.(png|jpg)$/,
+  use: [
+    {
+      loader: 'file-loader',
+      options: {
+        // outputPath: 'images/',
+        // publicPath: '/images',
+        name,
+      },
+    },
+  ],
+}, {
+  test: /\.(ttf|wof|otf)$/,
+  use: [
+    {
+      loader: 'file-loader',
+      options: {
+        name,
+      },
+    },
+  ],
+}, {
+  test: src => !src.endsWith('.inline.svg') && src.endsWith('.svg'),
+  loader: 'file-loader',
+  query: {
+    outputPath: 'svg/',
+    publicPath: '/dist',
+    name,
+  },
+}, {
+  test: src => src.endsWith('.inline.svg'),
+  loader: 'svg-inline-loader',
 });
 
 // Styles

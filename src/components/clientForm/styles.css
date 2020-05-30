@@ -1,0 +1,12 @@
+.successMess {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.infoMess {
+    color: red;
+}
+
+.required {
+    color: red;
+}

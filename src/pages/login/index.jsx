@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 import Title from '../../components/title';
+import Menu from '../../components/menu';
 import { Button, Input } from 'antd';
 import { setToken, isToken } from '../../libs/token';
 import { post } from '../../libs/api';
@@ -10,27 +11,27 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      nick: '',
       password: '',
     };
   }
 
   componentWillMount() {
     if (isToken()) {
-      this.props.history.replace('/admin');
+      this.props.history.replace('/');
     }
   }
 
   handleChange = label => ({ target: { value } }) => this.setState({ [label]: value })
 
   handleLogin = async () => {
-    const { email, password } = this.state;
-    if (!email || !password) {
+    const { nick, password } = this.state;
+    if (!nick || !password) {
       this.showError('Введите данные');
       return;
     }
 
-    const { data } = await post('/auth', { email, password });
+    const { data } = await post('/authMember', { nick, password });
     const { token } = data;
 
     if (!token) {
@@ -49,35 +50,45 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className={styles.wrapper}>
-        <div className={styles.row}>
-          <Title level={2}>Авторизация</Title>
+      <>      
+        <Menu />
+        <div className={styles.wrapper}>
+          <div className={styles.row}>
+            <Title level={2}>Авторизация</Title>
+          </div>
+          <div className={styles.row}>
+            <Input
+              placeholder="Никнейм"
+              value={this.state.nick}
+              onChange={this.handleChange('nick')}
+            />
+          </div>
+          <div className={styles.row}>
+            <Input
+              type="password"
+              placeholder="Пароль"
+              value={this.state.password}
+              onChange={this.handleChange('password')}
+            />
+          </div>
+          <div className={styles.row}>
+            <Button onClick={this.handleLogin} type="primary" block>Войти</Button>
+          </div>
+          <div className={styles.row}>
+            <Button type="primary" block>
+              <NavLink exact to="/register">Регистрация</NavLink>
+            </Button>
+          </div>          
+          <div className={styles.row}>
+            <Button type="secondary" block>
+              <NavLink exact to="/">Обратно на сайт</NavLink>
+            </Button>
+          </div>        
+          {this.state.error ? (
+            <div className={styles.error}>{this.state.error}</div>
+          ) : null}
         </div>
-        <div className={styles.row}>
-          <Input
-            placeholder="Email"
-            value={this.state.email}
-            onChange={this.handleChange('email')}
-          />
-        </div>
-        <div className={styles.row}>
-          <Input
-            type="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleChange('password')}
-          />
-        </div>
-        <div className={styles.row}>
-          <Button onClick={this.handleLogin} type="primary" block>Войти</Button>
-        </div>
-        <div className={styles.row}>
-          <Button href="http://www.xn--80aaf8admgsd3i.xn--p1acf" type="secondary" block>Обратно на сайт</Button>
-        </div>        
-        {this.state.error ? (
-          <div className={styles.error}>{this.state.error}</div>
-        ) : null}
-      </div>
+      </>
     );
   }
 }

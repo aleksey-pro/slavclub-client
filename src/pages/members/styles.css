@@ -1,0 +1,35 @@
+.jumbotron {
+  position: relative;
+  height: calc(100vh - 65px);
+  text-align: center;
+  padding: 0 1rem;
+  background-color: #222222;
+  color: #fff;
+}
+
+
+.zapis-button {
+  width: 250px;
+  margin: 38px auto;
+  text-transform: uppercase;
+  height: 38px;
+}
+
+@media screen and (min-width: 768px) {
+  .zapis-button {
+    bottom: 50%;
+  }
+}
+
+.main__jumbo {
+  width: 100%;
+}
+
+.main__image {
+  height: calc(100vh - 179px);
+  /* background: transparent url('../images/1-bg.jpg') no-repeat center; */
+  background-size: cover;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  color: #fff;
+}

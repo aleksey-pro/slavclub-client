@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken } from './token';
 
 const API_URL = {
-  production: 'http://www.xn--80aaf8admgsd3i.xn--p1acf/api/v1',
+  production: 'http://xn--80acc6acd1bv2f.xn--p1acf/api/v1',
   development: 'http://localhost:3055/api/v1',
 };
 

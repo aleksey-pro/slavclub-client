@@ -6,34 +6,58 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
-import LoginPage from './pages/login';
-import IndexPage from './pages/index';
-import ClientPage from './pages/client';
-import CreatePage from './pages/create';
 import { isToken } from './libs/token';
 
+
+import LoginPage from './pages/login';
+import IndexPage from './pages/index';
+import RegisterPage from './pages/register';
+import MemberPage from './pages/member';
+import MembersPage from './pages/members';
+import OtherMemberPage from './pages/other-member';
 
 const App = () => (
   <Switch>
     {!isToken() ? (
-      <Route component={LoginPage} />
+    <>
+      <Route
+        exact
+        path="/"
+        render={IndexPage}
+      />
+      <Route
+        exact
+        path="/login"
+        component={LoginPage}
+      />
+      <Route
+        exact
+        path="/register"
+        render={RegisterPage}
+      />
+    </>
     ) : null}
     <Route
       exact
-      path="/admin"
-      render={value => <IndexPage {...value} />}
+      path="/"
+      render={IndexPage}
     />
     <Route
       exact
-      path="/client/:id"
-      render={value => <ClientPage {...value} />}
+      path="/member/:id"
+      render={value => <MemberPage {...value} />}
     />
     <Route
       exact
-      path="/create"
-      render={value => <CreatePage {...value} />}
+      path="/otherMember/:id"
+      render={value => <OtherMemberPage {...value} />}
+    />    
+    <Route
+      exact
+      path="/members"
+      render={value => <MembersPage {...value} />}
     />
-    <Redirect to="/admin" />
+    <Redirect to="/" />
   </Switch>
 );
 

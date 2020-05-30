@@ -1,69 +1,112 @@
-.blockLight,
-.block {
-  display: table;
-  width: 100%;
-  border: solid 1px #eee;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  padding: 20px;
-  font-size: 14px;
-  line-height: 22px;
-}
-
-.blockLight {
-  cursor: pointer;
-}
-
-.blockLight:hover {
-  background: #f1f1f1;
-}
-
-.block input {
-  width: 80%;
-}
-
-.line {
-  width: 100%;
-  table-layout: fixed;
-  display: table-row;
-}
-
-.line > div {
-  padding: 10px 0;
-  border-collapse: collapse;
-  display: table-cell;
-}
-
-.ticker {
-  display: inline-block;
-}
-
-.ticker span {
-  background: #ccc;
+.jumbotron {
+  position: relative;
+  height: calc(100vh - 56px);
+  padding: 0 1rem;
+  background-color: #222222;
   color: #fff;
-  padding: 4px 8px;
-  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
 }
 
-.ticker .error {
-  background: red;
+.mainImage {
+  width: 100%;
+  object-fit: contain;
+  padding-bottom: 0.5em;
 }
 
-/* .button {
-  font-size: 14px;
-  padding: 5px 10px;
-  width: auto;
+
+.zapisButton {
+  width: 250px;
+  margin: 38px auto;
+  text-transform: uppercase;
+  color: #212529;
+  background-color: #f8f9fa;
+  display: block;
+  line-height: 38px;
+  border-radius: 5px;
+
+}
+
+@media screen and (min-width: 768px) {
+  .zapisButton {
+    bottom: 50%;
+  }
+}
+
+.main__jumbo {
+  width: 100%;
+}
+
+.main__image {
+  height: calc(100vh - 179px);
+  /* background: transparent url('../images/1-bg.jpg') no-repeat center; */
+  background-size: cover;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  color: #fff;
+}
+
+.mainText {
+  padding: 30px 5px 50px;
+  font-size: 1.2em;
+}
+
+
+.addressWrapper {
+  border-radius: 1em;
+  padding: 1em;
+}
+
+.footerTitleWrap {
+  display: flex;
+  align-items: center;
+}
+
+.footerTitle {
+  width: 100%;
+  text-align: center;
+}
+
+.contacts {
+  margin: 1em 0;
+}
+.addr {
+  margin: 0 auto;
+}
+
+.addrLine {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.map {
+  width: 100%;
+  height: 400px;
+}
+
+.callBtn {
+  cursor: pointer;
+  margin: 2em auto;
+  text-transform: uppercase;
+  font-size: 1.4em;
+  color: #212529;
+  background-color: #f8f9fa;
   display: inline-block;
-} */
-
-.lightTitle {
-  margin-left: 10px;
+  font-weight: 400;
+  text-align: center;
+  user-select: none;
+  border: 1px solid #a5a5a5;
+  padding: .375rem .75rem;
+  line-height: 1.5;
+  border-radius: .25rem;
 }
 
-.search {
-  margin-bottom: 20px !important;
-}
-
-.actionBtn {
-  margin: 0.5rem 2rem 0 1rem;
+.copy {
+  margin: 1rem 0;
 }

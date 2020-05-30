@@ -1,19 +1,66 @@
-.wrapper {
-  padding: 20px 30px;
-  background: #1f1f1f;
+.navbar {
+  border-bottom: 1px solid #6c757d;
+  background: #ffffff;
+  height: 65px;
 }
 
-.wrapper div,
-.wrapper a {
-  margin: 0 10px;
-  padding-bottom: 3px;
+#navbarNav {
+  background: #FFF;
+}
+
+.navbar-light .navbar-toggler {
+  border-color: rgba(0,0,0,.6) !important;
+}
+
+
+.navbar-sticky {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    border-bottom: 3px solid #1d1d1d;
+}
+
+
+.navbar-brand {
+  position: absolute;
+  right: 0.2em;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  padding: 0 1em;
+  border-radius: 5px;
   cursor: pointer;
-  color: $colorPrimary;
-  text-decoration: none;
-  border-bottom: solid 1px $colorPrimary;
 }
 
-.wrapper .active {
-  color: #fff;
-  border-bottom-color: transparent;
+.nav-link {
+  font-size: 1.3rem;
+  line-height: 1.1;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .show > .nav-link {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.navItem {
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.navItem:last-child {
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (min-width: 990px) {
+  .navbar-brand {
+    position: static;
+    border: none;
+  }
 }

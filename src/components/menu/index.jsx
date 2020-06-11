@@ -2,14 +2,16 @@
 import React, { Component } from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Navbar, Nav, Collapse, Button } from 'bootstrap-4-react';
-import { removeToken, isToken } from '../../libs/token';
+import { removeToken, isToken, getId, removeId } from '../../libs/token';
 import styles from './styles.css';
 
 const Menu = function({ history, location }) {
   const handleLogout = () => {
     removeToken();
+    removeId();
     history.replace(location.pathname);
   }
+  const id = getId();
 
   return (
     <>
@@ -24,14 +26,14 @@ const Menu = function({ history, location }) {
             <>
               <Nav.Item>
                 <NavLink
-                  exact to="/logout"
+                  exact to="/"
                   className={styles.navItem}
                   activeClassName={styles.active}
                   onClick={handleLogout}
                 >Выйти</NavLink>
               </Nav.Item>
             <Nav.Item>
-              <NavLink exact to="/member/:id" className={styles.navItem} activeClassName={styles.active}>Моя анкета</NavLink>
+              <NavLink exact to={`/member/${id}`} className={styles.navItem} activeClassName={styles.active}>Моя анкета</NavLink>
             </Nav.Item>  
             <Nav.Item>
                 <NavLink exact to="/members" className={styles.navItem} activeClassName={styles.active}>Анкеты участников</NavLink>
@@ -49,7 +51,7 @@ const Menu = function({ history, location }) {
             )}
           </Navbar.Nav>          
         </Collapse>
-        <Button type="link">+7995605680</Button>
+        {/* <Button type="link">+7995605680</Button> */}
       </Navbar>
     </>
   );

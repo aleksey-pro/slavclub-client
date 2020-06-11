@@ -11,10 +11,11 @@ import { isToken } from './libs/token';
 
 import LoginPage from './pages/login';
 import IndexPage from './pages/index';
-import RegisterPage from './pages/register';
+import RegisterShortPage from './pages/register-light';
 import MemberPage from './pages/member';
 import MembersPage from './pages/members';
 import OtherMemberPage from './pages/other-member';
+import VerifyUser from './pages/verifyUser';
 
 const App = () => (
   <Switch>
@@ -23,7 +24,7 @@ const App = () => (
       <Route
         exact
         path="/"
-        render={IndexPage}
+        component={IndexPage}
       />
       <Route
         exact
@@ -33,7 +34,12 @@ const App = () => (
       <Route
         exact
         path="/register"
-        render={RegisterPage}
+        component={RegisterShortPage}
+      />
+      <Route
+        exact
+        path="/authQRCode"
+        component={VerifyUser}
       />
     </>
     ) : null}

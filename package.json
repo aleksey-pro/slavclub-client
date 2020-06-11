@@ -51,6 +51,7 @@
     "cssnano": "^4.1.10",
     "file-saver": "^2.0.2",
     "qrcode": "^1.4.4",
+    "query-string": "^6.13.0",
     "react": "16.8.5",
     "react-dom": "16.8.5",
     "react-hot-loader": "4.8.0",

@@ -3,7 +3,7 @@ import { withRouter, NavLink } from 'react-router-dom';
 import Title from '../../components/title';
 import Menu from '../../components/menu';
 import { Button, Input } from 'antd';
-import { setToken, isToken } from '../../libs/token';
+import { setToken, isToken, setId, getId } from '../../libs/token';
 import { post } from '../../libs/api';
 import styles from './styles.css';
 
@@ -18,7 +18,8 @@ class LoginPage extends Component {
 
   componentWillMount() {
     if (isToken()) {
-      this.props.history.replace('/');
+      const id = getId();
+      this.props.history.replace(`/member/${id}`);
     }
   }
 
@@ -32,14 +33,19 @@ class LoginPage extends Component {
     }
 
     const { data } = await post('/authMember', { nick, password });
-    const { token } = data;
+    const { token, id } = data;
+
+    if (data.error) {
+      this.showError(data.error);
+    }
 
     if (!token) {
       this.showError('Ошибка авторизации');
       return;
     }
     setToken(token);
-    window.location.reload();
+    setId(id);
+    this.props.history.replace(`/member/${id}`);
   }
 
   showError = (error) => {

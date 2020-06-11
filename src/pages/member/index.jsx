@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import queryString from "query-string";
 import Menu from '../../components/menu';
 import { withRouter } from 'react-router-dom';
 import { get } from '../../libs/api';
 import ClientForm from '../../components/clientForm';
+import { getId } from '../../libs/token';
 import styles from'./styles.css';
 
 const MemberPage = ({ location, match }) => {
 
+  const query = queryString.parse(location.search);
+
   const [memberData, setMemberData] = useState({});
 
-  const id = '611172f2-d986-493a-b4bf-1c6e9531fa47';
-
   useEffect(() => {
+    const id = getId();
     get(`/member/${id}`).then(res => {
       setMemberData(res.data);
     });

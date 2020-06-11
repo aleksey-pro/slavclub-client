@@ -33,11 +33,10 @@ const IndexPage = () => {
         </div>
         <div className="row">
           <div className="col-sm-12">
-            <p className={styles.mainText}>Славик клуб. Клуб чести и достоинства, клуб объединил в себе своих участников со схожей системой ценностей. Вступившие в него получат возможность обмениваться между собой услугами и продуктами личного творчества. Взаимо обучаться и делиться опытом, наставлять, участвовать в СЛАВЬ ИГРЕ.</p>  
+            <p className={styles.mainText}>Славь клуб. Клуб чести и достоинства, клуб объединил в себе своих участников со схожей системой ценностей. Вступившие в него получат возможность обмениваться между собой услугами и продуктами личного творчества. Взаимо обучаться и делиться опытом, наставлять, участвовать в СЛАВЬ ИГРЕ.</p>  
           </div>
         </div>
         <div className="row">
-          <img className={styles.mainImage} src={mainImage} alt=""/>
           <img className={styles.mainImage} src={gallery1} alt=""/>
           <img className={styles.mainImage} src={gallery2} alt=""/>
           <img className={styles.mainImage} src={gallery3} alt=""/>
@@ -58,7 +57,7 @@ const IndexPage = () => {
               {/* <h5>Славь Салон</h5> */}
               <p className={styles.addrLine}>г. САНКТ-ПЕТЕРБУРГ</p>
               <p className={styles.addrLine}>www.славьклуб.рус</p>
-              <p className={styles.addrLine}>+79956056805</p>
+              {/* <p className={styles.addrLine}>+79956056805</p> */}
             </address>
           </div>
           <div className="col-sm-12 col-lg-6">
@@ -78,15 +77,15 @@ const IndexPage = () => {
               </Form>
             </div>
           </div>
-        <div className="row">
+        {/* <div className="row">
           <a href="tel:=+7995605680" type="button" className={styles.callBtn}>
             быстрый звонок
           </a>
-        </div>
+        </div> */}
         {/* <div className="row">
           <div id="map" className={styles.map}></div>
         </div> */}
-        <div className="copy">Все права защищены. &copy; {new Date().getFullYear()}</div>
+        <div className={styles.copy}>Все права защищены. &copy; {new Date().getFullYear()}</div>
       </div>
     </>
   );

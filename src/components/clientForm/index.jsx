@@ -5,7 +5,7 @@ import { post, update } from '../../libs/api';
 
 const REGEX_PASSWORD = new RegExp("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}", "g");
 
-const clientForm = ({ pathname, params, history, memberData }) => {
+const clientForm = ({ pathname, params, history, memberData, isLight }) => {
   const [formData, setFormData] = useState({});
 	const [dataSent, setDataSent] = useState(false);
 	const [passDuplicate, setpassDuplicate] = useState('');
@@ -33,11 +33,8 @@ const clientForm = ({ pathname, params, history, memberData }) => {
 				return;
 			};
 			post('/registerMember', formData).then(res => {
-				const id = res.data.randomId;
-				if(id) {
-					setDataSent(true);
-					setTimeout(() => { history.replace(`/member/${id}`)}, 3000);
-				};
+				setDataSent(true);
+				setTimeout(() => { history.replace("/login")}, 3000);
 			});
 		} 
 		if(parsePath(pathname) === 'member') {
@@ -95,7 +92,7 @@ const clientForm = ({ pathname, params, history, memberData }) => {
 						onChange={handleInputChange('phone')}
 					/>                  
 				</Form.Group>
-				<Form.Group>
+				{!isLight && <Form.Group>
 					<label htmlFor="location">Локация (местонахождение)</label>
 					<Form.Input
 						type="text"
@@ -104,8 +101,8 @@ const clientForm = ({ pathname, params, history, memberData }) => {
 						value={location}
 						onChange={handleInputChange('location')}
 					/>
-				</Form.Group>
-				<Form.Group>
+				</Form.Group>}
+				{!isLight && <Form.Group>
 					<label htmlFor="about">О себе</label>
 					<Form.Textarea
 						rows="5"
@@ -113,15 +110,15 @@ const clientForm = ({ pathname, params, history, memberData }) => {
 						value={about}
 						onChange={handleInputChange('about')}
 					></Form.Textarea>
-					</Form.Group>
-				<Form.Group>
+				</Form.Group>}
+				{!isLight && <Form.Group>
 					<label htmlFor="competence">Описание компетенций</label>
 					<Form.Textarea
 						rows="5"        
 						value={competence}   
 						onChange={handleInputChange('competence')}
 					></Form.Textarea>
-				</Form.Group>
+				</Form.Group>}
 				{ parsePath(pathname) === 'register' && (
 				<>
 					<Form.Group>
@@ -139,7 +136,7 @@ const clientForm = ({ pathname, params, history, memberData }) => {
 					<Form.Group>
 						<label htmlFor="competence">Повторите пароль</label>
 						<Form.Input
-							type="passwordRepeat"
+							type="password"
 							className="form-control"
 							placeholder=" "
 							id="passwordRepeat"
@@ -162,7 +159,6 @@ const clientForm = ({ pathname, params, history, memberData }) => {
 				<Button
 					onClick={handleSubmitForm}
 					primary
-					type="submit"
 					mt="2"
 					disabled={formError}
 				>

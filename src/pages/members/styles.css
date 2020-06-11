@@ -33,3 +33,7 @@
   margin-right: -1rem;
   color: #fff;
 }
+
+.member_item {
+  border-bottom: 1px solid #343a40;
+}

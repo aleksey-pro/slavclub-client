@@ -1,0 +1,15 @@
+.title {
+  text-align: center;
+}
+
+.topFrom {
+  display: flex;
+}
+
+.memberImage {
+  max-width: 100px;
+}
+
+.topInputs {
+  flex-grow: 1;
+}

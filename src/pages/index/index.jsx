@@ -24,7 +24,7 @@ const IndexPage = () => {
           <div className={styles.main__jumbo}>
             <div className={styles.jumbotron}>
               <img className={styles.mainImage} src={mainImage} alt=""/>
-              <div className="">
+              <div className={styles.mainButton}>
                 {isToken() && <NavLink exact to="/member/:id" className={styles.zapisButton}>Вход в анкету</NavLink>}
                 {!isToken() && <NavLink exact to="/register" className={styles.zapisButton}>Подать заявку</NavLink>}
               </div>
@@ -37,12 +37,12 @@ const IndexPage = () => {
           </div>
         </div>
         <div className="row">
-          <img className={styles.mainImage} src={gallery1} alt=""/>
-          <img className={styles.mainImage} src={gallery2} alt=""/>
-          <img className={styles.mainImage} src={gallery3} alt=""/>
-          <img className={styles.mainImage} src={gallery4} alt=""/>
-          <img className={styles.mainImage} src={gallery5} alt=""/>
-          <img className={styles.mainImage} src={gallery6} alt=""/>
+          <img className={styles.galleryImage} src={gallery1} alt=""/>
+          <img className={styles.galleryImage} src={gallery2} alt=""/>
+          <img className={styles.galleryImage} src={gallery3} alt=""/>
+          <img className={styles.galleryImage} src={gallery4} alt=""/>
+          <img className={styles.galleryImage} src={gallery5} alt=""/>
+          <img className={styles.galleryImage} src={gallery6} alt=""/>
         </div>
       </div>
       <div className={`container ${styles.addressWrapper}`}>

@@ -13,7 +13,7 @@ const RegisterPage = ({ location, history }) => {
         <div className="row">
           <div className="col-sm-12 zapis__jumbo">
             <div className={styles.title}>
-              <h3>Анкета участника</h3>
+              <h3>Заявка на регистрацию<br />в клубе</h3>
               <p>Славь клуб</p>
             </div>
             <ClientForm {...location} history={history} isLight={true}/>

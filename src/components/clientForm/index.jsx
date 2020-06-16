@@ -71,7 +71,7 @@ const clientForm = ({ pathname, params, history, memberData, isLight }) => {
 						onChange={handleInputChange('nick')}
 					/>
 				</Form.Group>
-				<Form.Group>
+				{!isLight && <Form.Group>
 					<label htmlFor="name"><span className={styles.required}>*</span> Имя</label>
 					<Form.Input
 						type="text"
@@ -81,7 +81,7 @@ const clientForm = ({ pathname, params, history, memberData, isLight }) => {
 						required
 						onChange={handleInputChange('name')}
 					/>                  
-				</Form.Group>				
+				</Form.Group>}				
 				<Form.Group>
 					<label htmlFor="phone">Номер телефона</label>
 					<Form.Input
@@ -119,7 +119,7 @@ const clientForm = ({ pathname, params, history, memberData, isLight }) => {
 						onChange={handleInputChange('competence')}
 					></Form.Textarea>
 				</Form.Group>}
-				{ parsePath(pathname) === 'register' && (
+				{!isLight && (
 				<>
 					<Form.Group>
 						<label htmlFor="password">Задайте пароль</label>

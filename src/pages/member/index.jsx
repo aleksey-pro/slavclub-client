@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import queryString from "query-string";
 import Menu from '../../components/menu';
 import { withRouter } from 'react-router-dom';
 import { get } from '../../libs/api';
@@ -8,9 +7,6 @@ import { getId } from '../../libs/token';
 import styles from'./styles.css';
 
 const MemberPage = ({ location, match }) => {
-
-  const query = queryString.parse(location.search);
-
   const [memberData, setMemberData] = useState({});
 
   useEffect(() => {

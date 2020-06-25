@@ -19,3 +19,7 @@ a {
 :global(.pull-right) {
   float: right;
 }
+
+#root {
+  overflow: hidden;
+}

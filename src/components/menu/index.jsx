@@ -46,6 +46,9 @@ const Menu = function({ history, location }) {
               </Nav.Item>
               <Nav.Item>
                 <NavLink exact to="/register" className={styles.navItem} activeClassName={styles.active}>Регистрация участника</NavLink>
+              </Nav.Item>
+              <Nav.Item>
+                <NavLink exact to="/ustav" className={styles.navItem} activeClassName={styles.active}>Устав клуба</NavLink>
               </Nav.Item>              
             </>
             )}

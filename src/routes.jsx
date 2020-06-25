@@ -15,7 +15,10 @@ import RegisterShortPage from './pages/register-light';
 import MemberPage from './pages/member';
 import MembersPage from './pages/members';
 import OtherMemberPage from './pages/other-member';
-import VerifyUser from './pages/verifyUser';
+import UstavPage from './pages/UstavPage';
+
+import VerifyUser from './pages/ActivateUser';
+import ActivateUser from './pages/ActivateUser';
 
 const App = () => (
   <Switch>
@@ -38,6 +41,16 @@ const App = () => (
       />
       <Route
         exact
+        path="/ustav"
+        component={UstavPage}
+      />
+      <Route
+        exact
+        path="/createNewUser"
+        component={ActivateUser}
+      />
+      <Route
+        exact
         path="/authQRCode"
         component={VerifyUser}
       />
@@ -57,11 +70,16 @@ const App = () => (
       exact
       path="/otherMember/:id"
       render={value => <OtherMemberPage {...value} />}
-    />    
+    />
     <Route
       exact
       path="/members"
       render={value => <MembersPage {...value} />}
+    />
+    <Route
+      exact
+      path="/ustav"
+      component={UstavPage}
     />
     <Redirect to="/" />
   </Switch>

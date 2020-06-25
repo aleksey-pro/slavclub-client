@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, BDiv } from 'bootstrap-4-react';
 import styles from './styles.css';
 import { post, update } from '../../libs/api';
+import axios from 'axios';
 
 const REGEX_PASSWORD = new RegExp("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}", "g");
 
@@ -14,13 +15,13 @@ const clientForm = ({ pathname, params, history, memberData, isLight }) => {
   const handleInputChange = label => (event) => {
 		setFormError(false);
 		setFormData({ ...formData, [label]: event.currentTarget.value });
-	}		
-		
+	}
+
 	const parsePath = path => path.split('/')[1];
 	const handleRepeatPassword = (evt) => {
 		setFormError(false);
 		setpassDuplicate(evt.currentTarget.value);
-	}	
+	}
 	const passValid = (pass) => {
 		return REGEX_PASSWORD.test( pass ) && pass === passDuplicate;
 	}
@@ -28,15 +29,19 @@ const clientForm = ({ pathname, params, history, memberData, isLight }) => {
   const handleSubmitForm = (evt) => {
 		evt.preventDefault();
 		if(parsePath(pathname) === 'register') {
-			if(!passValid(formData.password)) {
-				setFormError(true);
-				return;
-			};
-			post('/registerMember', formData).then(res => {
+			// if(!passValid(formData.password)) {
+			// 	setFormError(true);
+			// 	return;
+			// };
+			// post('/registerMember', formData).then(res => {
+			// 	setDataSent(true);
+			// 	setTimeout(() => { history.replace("/login")}, 3000);
+			// });
+			axios.post('http://localhost:4000/send-query', formData).then(res => {
 				setDataSent(true);
 				setTimeout(() => { history.replace("/login")}, 3000);
 			});
-		} 
+		}
 		if(parsePath(pathname) === 'member') {
 			const { id } = params;
 			update(`/member/${id}`, formData).then(res => {
@@ -53,7 +58,7 @@ const clientForm = ({ pathname, params, history, memberData, isLight }) => {
 			setFormData(memberData);
 		};
 	}, [memberData]);
-	
+
 	const { name, phone, mail, location, nick, about, competence} = formData;
 
 	return(
@@ -80,8 +85,8 @@ const clientForm = ({ pathname, params, history, memberData, isLight }) => {
 						value={name}
 						required
 						onChange={handleInputChange('name')}
-					/>                  
-				</Form.Group>}				
+					/>
+				</Form.Group>}
 				<Form.Group>
 					<label htmlFor="phone">Номер телефона</label>
 					<Form.Input
@@ -90,7 +95,7 @@ const clientForm = ({ pathname, params, history, memberData, isLight }) => {
 						placeholder=""
 						value={phone}
 						onChange={handleInputChange('phone')}
-					/>                  
+					/>
 				</Form.Group>
 				{!isLight && <Form.Group>
 					<label htmlFor="location">Локация (местонахождение)</label>
@@ -114,8 +119,8 @@ const clientForm = ({ pathname, params, history, memberData, isLight }) => {
 				{!isLight && <Form.Group>
 					<label htmlFor="competence">Описание компетенций</label>
 					<Form.Textarea
-						rows="5"        
-						value={competence}   
+						rows="5"
+						value={competence}
 						onChange={handleInputChange('competence')}
 					></Form.Textarea>
 				</Form.Group>}
@@ -144,7 +149,7 @@ const clientForm = ({ pathname, params, history, memberData, isLight }) => {
 						/>
 					</Form.Group>
 				</>
-				)}	
+				)}
 				{formError &&
 					<BDiv className={styles.infoMess}>Неправильно введен пароль или пароли не совпадают!</BDiv>
 				}
@@ -156,6 +161,10 @@ const clientForm = ({ pathname, params, history, memberData, isLight }) => {
 					parsePath(pathname) === 'register' &&
 					<BDiv className={styles.infoMess}>Заявка успешно отправлена</BDiv>
 				}
+				{!isLight && <BDiv>
+					<input type="checkbox"/><span className={styles.agreement}>Соглашаюсь с обработкой персональных данных, действующей идеи и уставом клуба. Осознаю всю ответственность их НЕ СОБЛЮДЕНИЯ.</span>
+					</BDiv>
+				}
 				<Button
 					onClick={handleSubmitForm}
 					primary
@@ -163,7 +172,7 @@ const clientForm = ({ pathname, params, history, memberData, isLight }) => {
 					disabled={formError}
 				>
 					{parsePath(pathname) === 'register' ? 'Подать заявку' : 'Обновить анкету'}
-				</Button>	
+				</Button>
 			</Form>
 		</>);
 };

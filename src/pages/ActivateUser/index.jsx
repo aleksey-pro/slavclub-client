@@ -12,9 +12,12 @@ const ActivateUser = ({ location, history }) => {
     const [error, setError] = useState(false);
 
     const verifyNewUser = () => {
+        console.log("verifyNewUser -> verifyNewUser", verifyNewUser)
         if(query.id) {
+            console.log("verifyNewUser -> query.id", query.id)
             get(`/registerMember/${query.id}`).then(res => {
                 const { id, token} = res.data;
+                console.log("verifyNewUser ->  id, token",  id, token)
                 setId(id);
                 setToken(token);
                 history.replace(`/member/${id}`);

@@ -17,7 +17,7 @@ import MembersPage from './pages/members';
 import OtherMemberPage from './pages/other-member';
 import UstavPage from './pages/UstavPage';
 
-import VerifyUser from './pages/ActivateUser';
+import VerifyUser from './pages/VerifyUser';
 import ActivateUser from './pages/ActivateUser';
 
 const App = () => (
